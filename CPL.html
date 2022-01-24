@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+        <script src="./head.js"></script>        <meta name="viewport" content="width=device-width, initial-scale=1">   
+        <meta name="description" content="Continual Predictive Learning from Videos">
+        <meta name="keywords" content="Video Prediction, Continual Learning, Computer Science">
+
+        <title>CPL</title>
+        <link rel="stylesheet" href="./font.css">
+        <link rel="stylesheet" href="./main.css">
+
+    </head>
+
+    <body data-gr-c-s-loaded="true">
+
+        <div class="outercontainer">
+            <div class="container">
+
+                <div class="content project_title">
+                    <h1>Continual Predictive Learning from Videos</h1>
+                </div>
+
+                <div class="content project_headline">
+                    <center><h2>
+                      <font size="3">Geng Chen*</Canvas></font>&nbsp;&nbsp;
+                      <font size="3">Wendong Zhang*</font>&nbsp;&nbsp;
+                      <font size="3">Han Lu</font>&nbsp;&nbsp;
+                      <font size="3">Siyu Gao</font>&nbsp;&nbsp;
+                      <font size="3">Yunbo Wang</font>&nbsp;&nbsp;
+                      <font size="3">Mingsheng Long</font>&nbsp;&nbsp;
+                      <font size="3">Xiaokang Yang</font>
+
+                </div>
+
+
+                <div class="content project_headline">
+                    <div class="img" style="text-align:center">
+                        <img class="img_responsive" src="./intro.jpg" alt="Teaser" style="margin:auto;max-width:40%">
+                    </div>
+                    <div class="text">
+                        <p>Figure 1: The new problem of continual predictive learning and
+                            the general framework of our approach at test time.</p>
+                    </div>
+                </div>
+
+
+                <div class="content">
+                    <div class="text">
+                        <h3>Abstract</h3>
+                        <p>Predictive learning ideally builds the world model of physical processes in one or more given environments. Typical setups assume that we can collect data from all environments at all times. In practice, however, different prediction tasks may arrive sequentially so that the environments may change persistently throughout the training procedure. Can we develop predictive learning algorithms that can deal with more realistic, non-stationary physical environments? In this paper, we study a new continual learning problem in the context of video prediction, and observe that most existing methods suffer from severe catastrophic forgetting in this setup. To tackle this problem, we propose the continual predictive learning (CPL) approach, which learns a mixture world model via predictive experience replay and performs test-time adaptation with non-parametric task inference. We construct two new benchmarks based on RoboNet and KTH, in which different tasks correspond to different physical robotic environments or human actions. Our approach is shown to effectively mitigate forgetting and remarkably outperform the na&#239;ve combinations of previous art in video prediction and continual learning. 
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content">
+                    <div class="text">
+                        <h3>Method</h3>
+                    </div>
+
+                    <div class="content project_headline">
+                        <div class="img" style="text-align:center">
+                            <img class="img_responsive" src="./model.jpg" alt="Teaser" style="margin:auto;max-width:90%">
+                        </div>
+                        <div class="text">
+                            <p>Figure 2: The overall network architecture of the <i>mixture world model</i> and the <i>predictive experience replay</i> training scheme in the proposed
+                                CPL method</p>
+                        </div>
+                    </div>
+
+                </div>
+     
+
+                <div class="content">
+                    <div class="text">
+                        <h3>Result on RoboNet Benchmark</h3>
+                    </div>
+
+                    <div class="content project_headline">
+                        <div class="img" style="text-align:center">
+                            <img class="img_responsive" src="./robonet_result.jpg" alt="Teaser" style="margin:auto;max-width:80%">
+                        </div>
+                        <div class="text">
+                            <p>Figure 3: Showcases of action-conditioned video prediction in
+                                the first environment of RoboNet <i>(i.e., Berkeley)</i> after training the
+                                models in the last environment <i>(i.e., Stanford)</i>. We compare our method (CPL-full) with the na&#239;ve combinations of existing world models and
+                                continual learning algorithms. </p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="content">
+                    <div class="text">
+                      <h3>Result on KTH Benchmark</h3>
+                        <ul class="download">
+          
+                    <table >
+                      <thead>
+                      <tr>
+                        <th>Inputs</th>
+                        <th>True outputs</th>
+                        <th>SVG</th>
+                        <th>PredRNN</th>
+                        <th>PhyDNet</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                      <td ><img src="images/GT_input.gif" height="125" style="margin-right:50px;"></td>
+                      <td><img src="images/GT_output.gif" height="125" style="margin-right:50px;"></td>
+                      <td><img src="images/svg.gif" height="125" style="margin-right:50px;"></td>
+                      <td><img src="images/predrnn.gif" height="125" style="margin-right:50px;"></td>
+                      <td><img src="images/phydnet.gif" height="125" style="margin-right:50px;"></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                    </ul>
+          
+                    <ul class="download">
+                    <table>
+                      <thead>
+                      <tr>
+                        <th>CPL-base+EWC</th>
+                        <th>PredRNN+LwF</th>
+                        <th>CPL-base</th>
+                        <th>CPL-base (Joint Train) </th>
+                        <th>CPL-full (ours)<n/th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                      <td><img src="images/EWC.gif" height="125" style="margin-right:50px;"></td>
+                      <td><img src="images/lwf.gif" height="125" style="margin-right:50px;"></td>
+                      <td><img src="images/CPL_base.gif" height="125" style="margin-right:50px;"></td>
+                      <td><img src="images/joint.gif" height="125" style="margin-right:50px;"></td>
+                      <td><img src="images/CPL.gif" height="125" style="margin-right:50px; border:#ff0000 solid 3px";bordercolor ></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                    </ul>
+                    </div>
+                    <div class="text">
+                        <p>Figure 4: Showcases of predicted frames of the first task <i>(i.e.,
+                            Boxing)</i> after the training period of the last task <i>(i.e., Running)</i>.</p>
+                    </div>
+                  </div>
+
+                  <div class="content">
+                    <div class="text">
+                      <h3>Related Publication</h3>
+          
+          
+          
+          
+                  <div class="content">
+                    <div class="text">
+                          <div><b>[1] PredRNN: Recurrent Neural Networks for Predictive Learning Using Spatiotemporal LSTMs</b></div>
+                          <div class="authors">
+                            <a href="http://people.csail.mit.edu/yunbo/">&nbsp&nbsp&nbsp&nbsp&nbsp Yunbo Wang</a>,
+                            <a href="http://ise.thss.tsinghua.edu.cn/~mlong/">Mingsheng Long</a>, 
+                            <a>Jianmin Wang</a>, 
+                            <a>Zhifeng Gao</a>, 
+                            and <a>Philip S. Yu</a>
+                          </div>
+                          <div>
+                            <span class="tag"><b><font color='#BB2222'>&nbsp&nbsp&nbsp&nbsp&nbsp NeurIPS 2017</font></b></span>
+                            <span class="tag"><a href='https://papers.nips.cc/paper/6689-predrnn-recurrent-neural-networks-for-predictive-learning-using-spatiotemporal-lstms.pdf'>PDF</a></span>
+                            <span class="tag"><a href='https://github.com/thuml/predrnn-pytorch'>Code [PyTorch]</a></span>
+                            <!-- <span class="tag"><a href="bibtex/predrnn.bib">BibTeX</a></span> -->
+                          </div>
+          
+          
+                          <div><b>[2] Stochastic Video Generation with a Learned Prior</b></div>
+                          <div class="authors">
+                            <a>&nbsp&nbsp&nbsp&nbsp&nbsp Emily Denton</a>,
+                            <a>Rob Fergus</a>
+                          </div>
+                          <div>
+                            <span class="tag"><b><font color='#BB2222'>&nbsp&nbsp&nbsp&nbsp&nbsp ICML 2018</font></b></span>
+                            <span class="tag"><a href="https://arxiv.org/pdf/1802.07687.pdf">PDF</a></span>
+                            <!--<span class="tag"><a href='https://sites.google.com/corp/view/svglp/'>Project Page</a></span>-->
+                            <span class="tag"><a href="https://github.com/edenton/svg">Code [PyTorch]</a></span>
+                            <!-- <span class="tag"><a href="bibtex/svg.bib">BibTeX</a></span> -->
+                          </div>
+          
+                          
+          
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+          
+          
+          
+                  </ul>
+                    </div>
+                  </div>
+
+            </div>
+        </div>
+
+    
+
+
+<div id="download_plus_animation"></div></body></html>
