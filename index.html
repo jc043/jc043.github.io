@@ -7,10 +7,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
 </head>
 
 <body>
+  <!-- Mobile image/video modal -->
+  <div id="media-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:1000; justify-content:center; align-items:center;">
+    <span style="position:absolute; top:20px; right:30px; color:white; font-size:40px; cursor:pointer;" onclick="closeModal()">&times;</span>
+    <img id="modal-img" style="max-width:90%; max-height:90%; border-radius:12px;" />
+    <video id="modal-video" style="max-width:90%; max-height:90%; border-radius:12px; display:none;" controls autoplay loop muted></video>
+  </div>
+  
+  <script>
+    function openModal(element) {
+      if (window.innerWidth > 768) return;
+      var modal = document.getElementById('media-modal');
+      var modalImg = document.getElementById('modal-img');
+      var modalVideo = document.getElementById('modal-video');
+      
+      var video = element.querySelector('video');
+      var img = element.querySelector('img');
+      
+      if (video) {
+        modalImg.style.display = 'none';
+        modalVideo.style.display = 'block';
+        modalVideo.src = video.querySelector('source').src;
+      } else if (img) {
+        modalVideo.style.display = 'none';
+        modalImg.style.display = 'block';
+        modalImg.src = img.src;
+      }
+      modal.style.display = 'flex';
+    }
+    
+    function closeModal() {
+      var modal = document.getElementById('media-modal');
+      var modalVideo = document.getElementById('modal-video');
+      modalVideo.pause();
+      modal.style.display = 'none';
+    }
+    
+    document.getElementById('media-modal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+    
+    // Add touch event for mobile
+    document.addEventListener('DOMContentLoaded', function() {
+      var thumbnails = document.querySelectorAll('.paper-thumbnail');
+      thumbnails.forEach(function(thumb) {
+        thumb.addEventListener('touchend', function(e) {
+          if (window.innerWidth <= 768) {
+            e.preventDefault();
+            openModal(this);
+          }
+        });
+      });
+    });
+  </script>
   <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
     <tr style="padding:0px">
       <td style="padding:0px">
@@ -25,10 +80,12 @@
                 I received my B.Eng. in Computer Science from Shanghai Jiao Tong University, advised by Prof.  <a href="https://wyb15.github.io/">Yunbo Wang</a>. 
                 I was also fortunate to do research at Stanford University, advised by Prof.<a href="https://jiajunwu.com/">Jiajun Wu</a>.
               </p>
-              <p style="text-align:center">
-                <a href="mailto:gec001@ucsd.edu">Email</a> &nbsp/&nbsp
-                <a href="data/GengChen_CV_2025.pdf">CV</a> &nbsp/&nbsp
-                <a href="https://github.com/jc043/">Github</a>
+              <p style="text-align:center" class="social-icons">
+                <a href="https://scholar.google.com/citations?user=1c1TsZ8AAAAJ&hl=zh-CN" target="_blank" title="Google Scholar"><i class="ai ai-google-scholar"></i></a>
+                <a href="https://x.com/gengchen" target="_blank" title="X"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://github.com/jc043/" target="_blank" title="Github"><i class="fab fa-github"></i></a>
+                <a href="mailto:gec001@ucsd.edu" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="data/GengChen_CV_2025.pdf" title="CV"><i class="fas fa-file-alt"></i></a>
               </p>
             </td>
             <td style="padding:2.5%;width:40%;max-width:40%">
@@ -37,23 +94,16 @@
           </tr>
         </tbody></table>
 
-        <table align="center" border="0" cellpadding="20" cellspacing="0" width="100%">
-          <tbody>
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
             <tr>
-              <td valign="middle" width="100%"><heading>News</heading></td>
-            </tr>
-          </tbody>
-        </table>
-   
-        <table align="center" border="0" cellpadding="0" cellspacing="0" width="90%">
-          <tbody>
-            <tr>
-              <td>
-          I'm actively applying for Ph.D. positions for Fall 2026.
-            </tr>
-          </tbody>
-        </table>
-
+            <td style="padding:20px;width:100%;vertical-align:middle">
+              <heading>News</heading>
+              <p>
+                I'm actively applying for Ph.D. positions for Fall 2026.
+              </p>
+            </td>
+          </tr>
+        </tbody></table>
 
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
             <tr>
@@ -61,7 +111,7 @@
               <heading>Research</heading>
               <p>
                 My long-term goal is to build embodied generalist agents that can acquire skills continually and adaptively and compose the learned skills to solve complicated long-horizon tasks. 
-                Towards this goal, I'm doing research at the intersection of robotics, computer vision, and machine learning. Recently, I'm interested in (humanoid) manipulation, learning from humans, and (3D) policy learning.
+                Towards this goal, I'm doing research at the intersection of robotics, computer vision, and machine learning. Recently, I'm interested in <strong>(humanoid) manipulation</strong>, <strong>learning from humans</strong>, and <strong>robot foundation models</strong>.
               </p>
             </td>
           </tr>
@@ -70,13 +120,42 @@
 				
 		       
 
+          <tr>
+            <td style="padding:20px;width:25%;vertical-align:middle">
+              <div class="paper-thumbnail">
+                <span class="conference-badge">arXiv</span>
+                <video width="180" height="120" controls autoplay loop muted >
+                  <source src="projects/innon/teaser.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </td>
+            <td width="75%" valign="middle">
+              <a href="">
+                <papertitle>In-N-On: Scaling Egocentric Manipulation with In-the-Wild and On-Task Data</papertitle>
+              </a>
+              <br>
+              <a href="https://xiongyicai.github.io/">Xiongyi Cai*</a>, <a href="https://rogerqi.github.io/">Ri-Zhao Qiu*</a>, <strong>Geng Chen</strong>, <a href="https://i-am-future.github.io/">Lai Wei</a>, <a href="https://www.liuisabella.com/">Isabella Liu</a>, Tianshu Huang, <a href="https://xuxin.ai/">Xuxin Cheng</a>, <a href="https://xiaolonw.github.io/">Xiaolong Wang</a>
+              <br>
+              <em><strong>arXiv</strong></em>, 2025
+              <br>
+              <a href="https://xiongyicai.github.io/In-N-On/">Project Page</a>
+              /
+              <a href="https://github.com/XiongyiCai/Human0">Code</a>
+              /
+              <a href="https://arxiv.org/abs/2511.15704">PDF</a>
+            </td>
+          </tr>
 
           <tr>
             <td style="padding:20px;width:25%;vertical-align:middle">
-              <video width="180" height="120" controls autoplay loop muted>
-                <source src="projects/FP3/FP3_teaser_v2.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
+              <div class="paper-thumbnail">
+                <span class="conference-badge">ICRA</span>
+                <video width="180" height="120" controls autoplay loop muted >
+                  <source src="projects/FP3/FP3_teaser_v2.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
             </td>
             <td width="75%" valign="middle">
               <a href="">
@@ -85,7 +164,7 @@
               <br>
               <a href="">Rujia Yang*</a>, <strong>Geng Chen*</strong>, <a href="https://alvinwen428.github.io/">Chuan Wen‡</a>, <a href="https://yang-gao.weebly.com/">Yang Gao‡</a>
               <br>
-              <em>Generative Models for Robot Learning Workshop @ ICLR 2025</em>
+              <em><strong>ICRA</strong></em>, 2026 / <em>Generative Models for Robot Learning Workshop @ <strong>ICLR</strong> 2025</em>
               <br>
               <a href="https://3d-foundation-policy.github.io/">Project Page</a>
               /
@@ -100,10 +179,13 @@
 
           <tr>
             <td style="padding:20px;width:25%;vertical-align:middle">
-              <video width="180" height="120" controls autoplay loop muted>
-                <source src="projects/hub/swallow_compressed.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
+              <div class="paper-thumbnail">
+                <span class="conference-badge">CoRL</span>
+                <video width="180" height="120" controls autoplay loop muted >
+                  <source src="projects/hub/swallow_compressed.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
             </td>
             <td width="75%" valign="middle">
               <a href="">
@@ -112,7 +194,7 @@
               <br>
               <a href="">Tong Zhang</a>*, <a href="">Boyuan Zheng</a>*, <a href="">Ruiqian Nai</a>, <a href="">Yingdong Hu</a>, <a href="">Yen-Jen Wang</a>, <strong>Geng Chen</strong>, <a href="">Fanqi Lin</a>, <a href="">Jiongye Li</a>, <a href="">Chuye Hong</a>, <a href="">Koushil Sreenath</a>, <a href="https://yang-gao.weebly.com/">Yang Gao</a>
               <br>
-              <em>CoRL</em>, 2025 / <em>Workshop on Whole-body Control and Bimanual Manipulation: Applications in Humanoids and Beyond @ RSS 2025</em>
+              <em><strong>CoRL</strong></em>, 2025 / <em>Workshop on Whole-body Control and Bimanual Manipulation @ <strong>RSS</strong> 2025</em>
               <br>
               <a href="https://hub-robot.github.io/">Project Page</a>
               /
@@ -125,10 +207,13 @@
 
           <tr>
             <td style="padding:20px;width:25%;vertical-align:middle">
-              <video width="180" height="120" controls autoplay loop muted>
-                <source src="projects/egomono4d/egomono4d.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
+              <div class="paper-thumbnail">
+                <span class="conference-badge">ICCV</span>
+                <video width="180" height="120" controls autoplay loop muted >
+                  <source src="projects/egomono4d/egomono4d.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
             </td>
             <td width="75%" valign="middle">
               <a href="">
@@ -137,7 +222,7 @@
               <br>
               <a href="https://michaelyuancb.github.io/">Chengbo Yuan</a>, <strong>Geng Chen</strong>, <a href="https://ericyi.github.io/">Li Yi</a>, <a href="https://yang-gao.weebly.com/">Yang Gao</a>
               <br>
-              <em>ICCV</em>, 2025
+              <em><strong>ICCV</strong></em>, 2025
               <br>
               <a href="https://egomono4d.github.io/">Project Page</a>
               /
@@ -152,7 +237,32 @@
 
           <tr>
             <td style="padding:20px;width:25%;vertical-align:middle">
-              <img src="images/PARL_01.png" alt="clean-usnob" width="180" height="100">
+              <div class="paper-thumbnail">
+                <span class="conference-badge">ECML</span>
+                <img src="images/CVRL.png" alt="CVRL" width="180" height="100" >
+              </div>
+            </td>
+            <td width="75%" valign="middle">
+              <a href="">
+                <papertitle>Continual Visual Reinforcement Learning with A Life-Long World Model</papertitle>
+              </a>
+              <br>
+              Minting Pan, Wendong Zhang, <strong>Geng Chen</strong>, <a href="">Xiangming Zhu</a>, Siyu Gao, <a href="https://wyb15.github.io/">Yunbo Wang</a>, Xiaokang Yang
+              <br>
+              <em><strong>ECML</strong></em>, 2025
+              <br>
+              <a href="https://arxiv.org/abs/2303.06572">PDF</a>
+              /
+              <a href="https://github.com/WendongZh/continual_visual_control">Code</a>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding:20px;width:25%;vertical-align:middle">
+              <div class="paper-thumbnail">
+                <span class="conference-badge">ICLR</span>
+                <img src="images/PARL_01.png" alt="clean-usnob" width="180" height="100" >
+              </div>
             </td>
             <td width="75%" valign="middle">
               <a href="">
@@ -161,7 +271,7 @@
               <br>
               <a href="http://weiyuliu.com/">Weiyu Liu*</a>, <strong>Geng Chen*</strong>, <a href="https://jiayuanm.com/">Jiayuan Mao*</a>, <a href="https://web.stanford.edu/~joycj/">Joy Hsu</a>, <a href="https://jiajunwu.com/">Jiajun Wu</a>
               <br>
-              <em>ICLR</em>, 2024
+              <em><strong>ICLR</strong></em>, 2024
               <br>
               <a href="https://parl2024.github.io/">Project Page</a>
               /
@@ -174,7 +284,10 @@
 
           <tr>
             <td style="padding:20px;width:25%;vertical-align:middle">
-              <img src="images/CPL.jpg" alt="clean-usnob" width="180" height="120">
+              <div class="paper-thumbnail">
+                <span class="conference-badge">CVPR</span>
+                <img src="images/CPL.jpg" alt="clean-usnob" width="180" height="120" >
+              </div>
             </td>
             <td width="75%" valign="middle">
               <a href="">
@@ -183,7 +296,7 @@
               <br>
               <strong>Geng Chen*</strong>, Wendong Zhang*, Han Lu, Siyu Gao, <a href="https://wyb15.github.io/">Yunbo Wang</a>, Mingsheng Long, Xiaokang Yang
               <br>
-              <em>CVPR</em>, 2022&nbsp <font color="red"><strong>(Oral Presentation)</strong></font>
+              <em><strong>CVPR</strong></em>, 2022&nbsp <font color="red"><strong>(Oral Presentation)</strong></font>
               <br>
               <a href="https://jc043.github.io/CPL">Project Page</a>
         /
@@ -230,7 +343,7 @@
       
                 <p><strong>Shanghai Jiao Tong University</strong>, Shanghai, China<br>
                 Research Assistant . Jul. 2019 to Jun. 2023<br>
-                Advisor: Prof. <a href="https://wyb15.github.io/">Yunbo Wang</a>.
+                Advisor: Prof. <a href="https://wyb15.github.io/">Yunbo Wang</a>
                 </td>
                 
               </tr>
@@ -243,7 +356,7 @@
             <td style="padding:0px">
               <br>
               <p style="text-align:right;font-size:small;">
-                Webpage template borrowed from <a href="https://jonbarron.info">Jon Barron</a> website. <br>
+                Inspired by <a href="https://jonbarron.info">Jon Barron</a>'s template. <br>
               </p>
             </td>
           </tr>
