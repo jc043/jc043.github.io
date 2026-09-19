@@ -177,18 +177,59 @@ video:hover, td img:hover {
 }
 
 /* Experience section styling */
-table[width="90%"] p {
-  padding: 16px 20px;
-  margin: 12px 0;
+.experience-list {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.experience-item {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
   background-color: var(--card-background);
+  border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
-  border-left: 4px solid var(--primary-color);
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
-table[width="90%"] p:hover {
+.experience-item:hover {
   transform: translateX(4px);
   box-shadow: var(--shadow);
+}
+
+.experience-logo {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.experience-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0;
+  cursor: default;
+}
+
+.experience-details {
+  text-align: left;
+  line-height: 1.4;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.experience-school {
+  font-size: 0.98rem;
 }
 
 /* Conference/venue tags */
@@ -222,6 +263,23 @@ em strong {
   letter-spacing: 0.5px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   z-index: 5;
+}
+
+/* Paper distinction callout */
+.paper-award {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #fff4d6;
+  color: #8a4b00;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.paper-award a {
+  color: inherit;
 }
 
 /* Zoom button for mobile */
@@ -356,11 +414,29 @@ span.highlight {
     padding-right: 15px !important;
   }
   
-  /* News section alignment */
-  table[width="90%"] {
-    width: 100% !important;
-    padding-left: 15px;
-    padding-right: 15px;
+  /* Experience cards */
+  .experience-list {
+    width: 100%;
+  }
+
+  .experience-item {
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .experience-logo {
+    width: 52px;
+    height: 52px;
+    padding: 6px;
+  }
+
+  .experience-details {
+    white-space: normal;
+  }
+
+  .experience-school {
+    font-size: 1rem;
   }
   
   /* Paper entries - stack vertically */
@@ -428,12 +504,6 @@ span.highlight {
   .paper-thumbnail video:active,
   .paper-thumbnail img:active {
     opacity: 0.8;
-  }
-  
-  /* Experience cards on mobile */
-  table[width="90%"] p {
-    padding: 14px 16px;
-    margin: 10px 0;
   }
   
   /* Footer on mobile */
